@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>茅山00后小筠 | 最终置顶视频执行手册</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&family=Noto+Sans+SC:wght@300;400;500&display=swap" rel="stylesheet">
+    
+    <!-- Chosen Palette: New Chinese Zen (Deep Teal, Paper White, Cinnabar Red, Ink Black) -->
+    <!-- 
+         Palette Reference:
+         Background: #F5F7F5 (Rice Paper White)
+         Primary Text: #1F2937 (Ink Gray)
+         Brand Color (Maoshan Green): #2C5C55
+         Accent (Cinnabar): #9A3412
+         Secondary Accent (Gold): #D97706
+    -->
+
+    <!-- Application Structure Plan:
+         1. **Header**: Establishes IP identity ("00后 Maoshan Taoist").
+         2. **Strategy Dashboard**: High-level view of the IP persona (Radar Chart) and the Conversion Funnel, establishing the "Why".
+         3. **Script Command Center (Interactive Tab System)**: The "What".
+            -   Toggles between Video 1 (Persona), Video 2 (Teaching), Video 3 (Product).
+            -   Updates: Pacing Chart (Hook/Body/CTA), Detailed Shot List Table, and specific Director's Notes (Crucial for the "Live vs Voiceover" strategy).
+         4. **Production Toolkit**: The "How".
+            -   Lighting Guide (Line Chart).
+            -   Interactive Checklist updated with specific gear like DJI Pocket 3 and props like the Patting Stick.
+    -->
+
+    <!-- Visualization & Content Choices:
+         1. **IP Persona**: Radar Chart. GOAL: Relationships. Visualizes the balance of attributes (Contrast, Aesthetics, Reality).
+         2. **Video Pacing**: Horizontal Stacked Bar Chart. GOAL: Compare/Time. Visualizes the rhythm of Hook (3s), Body, and CTA.
+         3. **Lighting Guide**: Line Chart. GOAL: Change. Shows light quality over time of day (Golden Hour vs Noon).
+         4. **Shot Lists**: Styled Data Tables. GOAL: Organize. Clear, readable steps for the camera crew, updated with the latest script data.
+         
+         CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. All charts via Chart.js Canvas or HTML/CSS styling.
+    -->
+
+    <style>
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            background-color: #F5F7F5;
+            color: #1F2937;
+        }
+        h1, h2, h3, h4, .serif {
+            font-family: 'Noto Serif SC', serif;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 100%;
+            height: 300px;
+        }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2C5C55;
+            border-radius: 4px;
+        }
+        .tab-active {
+            background-color: #2C5C55;
+            color: white;
+            border-color: #2C5C55;
+        }
+        .tab-inactive {
+            background-color: white;
+            color: #4B5563;
+            border-color: #E5E7EB;
+        }
+        .tab-inactive:hover {
+            background-color: #F3F4F6;
+        }
+        .live-tag {
+            background-color: #DEF7EC;
+            color: #03543F;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            border: 1px solid #84E1BC;
+        }
+        .vo-tag {
+            background-color: #FEF3C7;
+            color: #92400E;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            border: 1px solid #FCD34D;
+        }
+    </style>
+</head>
+<body class="antialiased min-h-screen flex flex-col">
+
+    <!-- Hero Section -->
+    <header class="bg-[#2C5C55] text-white shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <span class="inline-block bg-[#9A3412] text-xs font-bold px-2 py-1 rounded mb-2 tracking-widest">最终定稿 · 执行手册</span>
+                    <h1 class="text-3xl md:text-5xl font-bold serif tracking-wide">茅山00后 · 小筠</h1>
+                    <p class="mt-2 text-green-100 text-lg font-light">IP定位：反差感修行者 / 真实道家养生</p>
+                </div>
+                <div class="text-right hidden md:block opacity-80">
+                    <div class="text-sm">视觉风格</div>
+                    <div class="text-2xl serif font-bold">清冷 · 通透 · 新中式</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Layout -->
+    <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 w-full space-y-12">
+
+        <!-- 1. Strategy Dashboard Section -->
+        <section>
+            <div class="mb-6">
+                <h2 class="text-3xl font-bold text-[#2C5C55] serif border-b-2 border-[#2C5C55] pb-2 inline-block">策略总览 Strategy Dashboard</h2>
+                <p class="mt-3 text-gray-600 max-w-3xl">
+                    本部分解析“茅山00后”IP的核心构成。通过雷达图分析人设的多维平衡，利用流程图展示三条置顶视频如何协同工作，将公域流量转化为私域铁粉。
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- IP Persona Radar -->
+                <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
+                    <h3 class="text-xl font-bold mb-4 text-gray-800 flex items-center">
+                        <span class="w-2 h-6 bg-[#D97706] mr-2 rounded"></span>IP 核心属性分析
+                    </h3>
+                    <div class="chart-container">
+                        <canvas id="personaRadar"></canvas>
+                    </div>
+                    <div class="mt-4 text-sm text-gray-500 text-center">
+                        <span class="mx-2">⚡️ 强反差 (95)</span> | <span class="mx-2">🏔️ 真实修行 (90)</span> | <span class="mx-2">🎨 视觉美学 (85)</span>
+                    </div>
+                </div>
+
+                <!-- Funnel Strategy -->
+                <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-100 flex flex-col">
+                    <h3 class="text-xl font-bold mb-4 text-gray-800 flex items-center">
+                        <span class="w-2 h-6 bg-[#9A3412] mr-2 rounded"></span>流量转化闭环
+                    </h3>
+                    <div class="flex-grow flex flex-col justify-center space-y-4">
+                        <!-- Step 1 -->
+                        <div class="flex items-center p-3 bg-gray-50 rounded-lg border-l-4 border-gray-400">
+                            <div class="bg-gray-800 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold mr-4 shrink-0">1</div>
+                            <div>
+                                <h4 class="font-bold">人设篇 (建立信任)</h4>
+                                <p class="text-xs text-gray-600">打破刻板印象，以"竹林背影"与"Pocket3第一视角"展示山居生活。</p>
+                            </div>
+                        </div>
+                        <!-- Arrow -->
+                        <div class="flex justify-center -my-2">
+                            <span class="text-gray-400 text-xl">▼</span>
+                        </div>
+                        <!-- Step 2 -->
+                        <div class="flex items-center p-3 bg-green-50 rounded-lg border-l-4 border-green-500">
+                            <div class="bg-green-600 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold mr-4 shrink-0">2</div>
+                            <div>
+                                <h4 class="font-bold">教学篇 (痛点引流)</h4>
+                                <p class="text-xs text-gray-600">直击"肚子大/眼睛花"，教授"左右开弓似射雕"，植入拍打棒。</p>
+                            </div>
+                        </div>
+                        <!-- Arrow -->
+                        <div class="flex justify-center -my-2">
+                            <span class="text-gray-400 text-xl">▼</span>
+                        </div>
+                        <!-- Step 3 -->
+                        <div class="flex items-center p-3 bg-orange-50 rounded-lg border-l-4 border-orange-500">
+                            <div class="bg-orange-600 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold mr-4 shrink-0">3</div>
+                            <div>
+                                <h4 class="font-bold">产品篇 (变现/私域)</h4>
+                                <p class="text-xs text-gray-600">站桩+艾灸组合拳，微距展示艾绒，自然植入产品。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. Script Command Center -->
+        <section id="script-center">
+            <div class="mb-6">
+                <h2 class="text-3xl font-bold text-[#2C5C55] serif border-b-2 border-[#2C5C55] pb-2 inline-block">拍摄执行中台 Script Center</h2>
+                <p class="mt-3 text-gray-600 max-w-3xl">
+                    这是拍摄现场的核心工具。请点击下方标签切换不同视频的执行脚本。图表将展示该视频的节奏分配，表格提供详细的分镜指导（含最新的现场收音/后期配音指示）。
+                </p>
+            </div>
+
+            <!-- Tabs -->
+            <div class="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4 mb-6">
+                <button onclick="loadVideoData(1)" id="btn-v1" class="tab-active px-6 py-3 rounded-lg font-bold shadow-sm border transition-all duration-200 flex items-center justify-center">
+                    <span class="mr-2">📺</span> 视频一：人设篇
+                </button>
+                <button onclick="loadVideoData(2)" id="btn-v2" class="tab-inactive px-6 py-3 rounded-lg font-bold shadow-sm border transition-all duration-200 flex items-center justify-center">
+                    <span class="mr-2">🧘</span> 视频二：教学篇
+                </button>
+                <button onclick="loadVideoData(3)" id="btn-v3" class="tab-inactive px-6 py-3 rounded-lg font-bold shadow-sm border transition-all duration-200 flex items-center justify-center">
+                    <span class="mr-2">🔥</span> 视频三：产品篇
+                </button>
+            </div>
+
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200">
+                <!-- Video Header Info -->
+                <div class="bg-[#F9FAFB] p-6 border-b border-gray-200">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center">
+                        <div>
+                            <h3 id="video-title" class="text-2xl font-bold text-[#1F2937] serif">加载中...</h3>
+                            <p id="video-purpose" class="text-sm text-[#4B5563] mt-1 font-medium">加载中...</p>
+                        </div>
+                        <div class="mt-4 md:mt-0 px-4 py-2 bg-white border border-gray-200 rounded shadow-sm">
+                            <span class="text-xs text-gray-500 uppercase tracking-wider">核心视觉锤 Visual Hammer</span>
+                            <div id="video-hammer" class="font-bold text-[#9A3412] text-lg">加载中...</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-0 lg:divide-x divide-gray-200">
+                    
+                    <!-- Left Col: Pacing & Notes -->
+                    <div class="lg:col-span-1 p-6 bg-white space-y-6">
+                        <div>
+                            <h4 class="text-sm font-bold text-gray-500 uppercase tracking-wider mb-4">视频节奏分析 Pacing</h4>
+                            <div class="chart-container" style="height: 150px;">
+                                <canvas id="pacingChart"></canvas>
+                            </div>
+                            <div class="mt-2 text-xs text-gray-400 text-center">
+                                红: Hook (前3秒) | 黄: Body (内容) | 蓝: CTA (转化)
+                            </div>
+                        </div>
+
+                        <div class="bg-yellow-50 p-4 rounded-lg border border-yellow-100">
+                            <h4 class="text-sm font-bold text-yellow-800 mb-2 flex items-center">
+                                🎬 导演特别备注 (Updated)
+                            </h4>
+                            <ul id="director-notes" class="text-sm text-yellow-900 space-y-2 list-disc list-inside">
+                                <!-- JS Populated -->
+                            </ul>
+                        </div>
+
+                        <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
+                            <h4 class="text-sm font-bold text-gray-700 mb-2">🎵 BGM 建议</h4>
+                            <p id="bgm-notes" class="text-sm text-gray-600 leading-relaxed">
+                                <!-- JS Populated -->
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Right Col: Detailed Script Table -->
+                    <div class="lg:col-span-2 p-6 bg-white">
+                        <h4 class="text-sm font-bold text-gray-500 uppercase tracking-wider mb-4 flex justify-between items-center">
+                            <span>分镜脚本 Shot List</span>
+                            <span class="text-xs normal-case bg-green-100 text-green-800 px-2 py-1 rounded">
+                                💡 Live = 现场收音 | VO = 后期配音
+                            </span>
+                        </h4>
+                        <div class="overflow-x-auto">
+                            <table class="min-w-full divide-y divide-gray-200 text-sm">
+                                <thead class="bg-gray-50">
+                                    <tr>
+                                        <th scope="col" class="px-3 py-3 text-left font-bold text-gray-500 w-16">秒数</th>
+                                        <th scope="col" class="px-3 py-3 text-left font-bold text-gray-500 w-20">景别</th>
+                                        <th scope="col" class="px-3 py-3 text-left font-bold text-gray-500">画面内容</th>
+                                        <th scope="col" class="px-3 py-3 text-left font-bold text-gray-500">台词/旁白 (Audio)</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="script-body" class="bg-white divide-y divide-gray-200">
+                                    <!-- JS Populated -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Production Toolkit -->
+        <section>
+            <div class="mb-6">
+                <h2 class="text-3xl font-bold text-[#2C5C55] serif border-b-2 border-[#2C5C55] pb-2 inline-block">制片工具箱 Toolkit</h2>
+                <p class="mt-3 text-gray-600 max-w-3xl">
+                    既然要拍出“电影感”，光线和道具绝不能马虎。使用下表确认最佳拍摄时段，并核对最新的装备（含 Pocket 3 和拍打棒）。
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Lighting Guide -->
+                <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
+                    <h3 class="text-xl font-bold mb-4 text-gray-800">☀️ 最佳光线时间表</h3>
+                    <div class="chart-container">
+                        <canvas id="lightingChart"></canvas>
+                    </div>
+                    <p class="mt-4 text-sm text-gray-500 leading-relaxed">
+                        <strong class="text-[#9A3412]">禁止时间：</strong> 11:00 - 14:00 (顶光死角)。<br>
+                        <strong class="text-[#2C5C55]">黄金时间：</strong> 清晨6-8点（有雾气/紫气）、傍晚16-17点（暖阳）。
+                    </p>
+                </div>
+
+                <!-- Interactive Checklist -->
+                <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-100 flex flex-col h-full">
+                    <h3 class="text-xl font-bold mb-4 text-gray-800">🎒 拍摄前核对清单 (Updated)</h3>
+                    <div class="space-y-3 flex-grow overflow-y-auto pr-2 custom-checklist">
+                        <!-- Checklist Items -->
+                        <label class="flex items-center space-x-3 p-3 rounded hover:bg-gray-50 cursor-pointer transition">
+                            <input type="checkbox" class="form-checkbox h-5 w-5 text-[#2C5C55] rounded border-gray-300 focus:ring-[#2C5C55]">
+                            <span class="text-gray-700 select-none font-medium">DJI Pocket 3 + 挂脖支架 (第一视角必备)</span>
+                        </label>
+                        <label class="flex items-center space-x-3 p-3 rounded hover:bg-gray-50 cursor-pointer transition">
+                            <input type="checkbox" class="form-checkbox h-5 w-5 text-[#2C5C55] rounded border-gray-300 focus:ring-[#2C5C55]">
+                            <span class="text-gray-700 select-none">拍打棒 (视频二道具)</span>
+                        </label>
+                        <label class="flex items-center space-x-3 p-3 rounded hover:bg-gray-50 cursor-pointer transition">
+                            <input type="checkbox" class="form-checkbox h-5 w-5 text-[#2C5C55] rounded border-gray-300 focus:ring-[#2C5C55]">
+                            <span class="text-gray-700 select-none">道袍（深蓝/青色，已熨烫）</span>
+                        </label>
+                        <label class="flex items-center space-x-3 p-3 rounded hover:bg-gray-50 cursor-pointer transition">
+                            <input type="checkbox" class="form-checkbox h-5 w-5 text-[#2C5C55] rounded border-gray-300 focus:ring-[#2C5C55]">
+                            <span class="text-gray-700 select-none">佩剑 / 拂尘 (擦亮无锈迹)</span>
+                        </label>
+                        <label class="flex items-center space-x-3 p-3 rounded hover:bg-gray-50 cursor-pointer transition">
+                            <input type="checkbox" class="form-checkbox h-5 w-5 text-[#2C5C55] rounded border-gray-300 focus:ring-[#2C5C55]">
+                            <span class="text-gray-700 select-none">艾条实物 (未拆封礼盒 + 散装展示)</span>
+                        </label>
+                        <label class="flex items-center space-x-3 p-3 rounded hover:bg-gray-50 cursor-pointer transition">
+                            <input type="checkbox" class="form-checkbox h-5 w-5 text-[#2C5C55] rounded border-gray-300 focus:ring-[#2C5C55]">
+                            <span class="text-gray-700 select-none">茶具 / 蒲团</span>
+                        </label>
+                        <label class="flex items-center space-x-3 p-3 rounded hover:bg-gray-50 cursor-pointer transition">
+                            <input type="checkbox" class="form-checkbox h-5 w-5 text-[#2C5C55] rounded border-gray-300 focus:ring-[#2C5C55]">
+                            <span class="text-gray-700 select-none">领夹麦克风 (户外防风噪必备)</span>
+                        </label>
+                        <label class="flex items-center space-x-3 p-3 rounded hover:bg-gray-50 cursor-pointer transition">
+                            <input type="checkbox" class="form-checkbox h-5 w-5 text-[#2C5C55] rounded border-gray-300 focus:ring-[#2C5C55]">
+                            <span class="text-gray-700 select-none">手机设置：4K 60fps</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-gray-800 text-gray-400 py-8 mt-8">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <p class="serif mb-2">大道至简，实修实证。</p>
+            <p class="text-xs">Maoshan Gen Z IP Execution Strategy © 2026</p>
+        </div>
+    </footer>
+
+    <!-- Data & Logic -->
+    <script>
+        // --- DATA STORE (UPDATED FROM FINAL SCRIPT) ---
+        const videoData = {
+            1: {
+                title: "视频一：人设篇《00后不进大厂进深山？》",
+                purpose: "建立信任，确立“真道士”身份，制造“城市打工人VS山中修行”的强反差。",
+                hammer: "拔剑出鞘 (2-3s)",
+                bgm: "0-3s：城市噪音（地铁/键盘）；3s后：清脆拔剑声 + 悠扬古琴/鸟鸣。",
+                directorNotes: [
+                    "设备：使用 Pocket 3 拍摄 8-12s 的第一视角镜头。",
+                    "场景：5-8s 背影镜头务必选在'竹林'，利用光影。",
+                    "眼神：最后直视镜头时要练习'定'，眼神要真诚。"
+                ],
+                pacing: [3, 12, 5], // Hook, Body, CTA
+                script: [
+                    { time: "0-1s", shot: "全景 (黑白)", visual: "城市CBD大楼，或早高峰拥挤的人群。", audio: "(音效：嘈杂的车流声)" },
+                    { time: "1-2s", shot: "特写 (黑白)", visual: "疯狂敲击键盘的手，显示'加班/焦虑'。", audio: "(音效：急促键盘声+心跳)" },
+                    { time: "2-3s", shot: "特写 (高光)", visual: "手握剑柄，拇指一推，寒光一闪。", audio: "(音效：铮——！！)" },
+                    { time: "3-5s", shot: "大全景", visual: "茅山清晨，云海翻腾，道观飞檐。", audio: "旁白：同龄人都在内卷..." },
+                    { time: "5-8s", shot: "全景", visual: "身穿深蓝道袍，在【竹林里】盘腿打坐，挺拔背影。", audio: "...我却选择了在茅山，修身养性。" },
+                    { time: "8-12s", shot: "快剪组接", visual: "1.第一视角拉窗帘(Pocket3) 2.井水泼脸 3.扫地/擦桌上香。", audio: "每天五点起床，采气、练功。日子很慢..." },
+                    { time: "12-15s", shot: "跟拍", visual: "展示2个疏通身体的动作（通臂或云手）。", audio: "师父说，身体是修行的本钱，心定了，气就顺了。" },
+                    { time: "15-18s", shot: "特写", visual: "茶桌前缓缓抬头，眼神直视镜头。", audio: "我开这个号，想把老祖宗疏通身体的方法分享给疲惫的年轻人。" },
+                    { time: "18-20s", shot: "全景", visual: "抱拳行礼 (子午诀)。", audio: "我是小筠，我在茅山等你。" },
+                ]
+            },
+            2: {
+                title: "视频二：教学篇《肚子大、眼睛花？》",
+                purpose: "直击“假性肚腩”和“视疲劳”痛点，展示立竿见影的效果，引导入群。",
+                hammer: "瞬间挺拔 + 眼神光",
+                bgm: "前段：沉闷低音；中段：骨骼舒展声效 + 悠扬笛子。",
+                directorNotes: [
+                    "声音策略：0-5s 和 14s 后现场真说(Live)，动作展示(5-14s)做动作别说话(VO)。",
+                    "动作：'左右开弓似射雕'要大开大合，显腿长。",
+                    "道具：17s 后植入'拍打棒'，建立向往感。"
+                ],
+                pacing: [3, 14, 5], // Hook, Body, CTA
+                script: [
+                    { time: "0-3s", shot: "近景", visual: "故意含胸驼背，捏小肚子衣服褶皱。", audio: "<span class='live-tag'>Live</span> 经常觉得乏力、肚子减不下去？" },
+                    { time: "3-5s", shot: "特写", visual: "瞬间挺直腰杆，眼神犀利。", audio: "<span class='live-tag'>Live</span> 这不是胖，是你的身体堵住了。" },
+                    { time: "5-10s", shot: "全景 (仰拍)", visual: "核心动作：左右开弓似射雕。单手推拉，打开胸廓。", audio: "<span class='vo-tag'>VO</span> 教你们古八段锦的一招...把腋下胆经完全拉开。" },
+                    { time: "10-14s", shot: "特写组接", visual: "腋下衣服紧绷 -> 眼神远眺。", audio: "<span class='vo-tag'>VO</span> 肝开窍于目...血供到眼睛，自然明目。" },
+                    { time: "14-17s", shot: "近景", visual: "猛地睁开眼睛，眼神清澈。长舒一口气。", audio: "<span class='live-tag'>Live</span> 呼—— 左边拉完拉右边...视力瞬间清晰，世界亮了。" },
+                    { time: "17-20s", shot: "中景", visual: "拿【拍打棒】轻轻拍打放松，自信微笑。", audio: "<span class='live-tag'>Live</span> 练完用拍打棒放松。筋长一寸，寿延十年..." },
+                    { time: "20-22s", shot: "特写", visual: "手指指向文字引导。", audio: "<span class='vo-tag'>VO</span> 看置顶进群，带你疏通身体。" },
+                ]
+            },
+            3: {
+                title: "视频三：产品篇《手脚冰凉？先站桩，后艾灸》",
+                purpose: "解决“体寒”痛点，通过“站桩+艾灸”组合拳，自然植入艾条产品。",
+                hammer: "撕开金黄艾绒 (微距)",
+                bgm: "前段：寒风呼啸；中段：温暖炉火声 + 沉稳古琴。",
+                directorNotes: [
+                    "前段色调偏蓝(冷)，中段艾灸色调转暖(橙黄)。",
+                    "撕开艾条是成交关键，必须用微距拍出绒感。",
+                    "态度要高冷：'我自己用觉得好才分享'，不要叫卖。"
+                ],
+                pacing: [3, 12, 10], // Hook, Body, CTA
+                script: [
+                    { time: "0-3s", shot: "近景", visual: "寒风中搓手，哈白气。", audio: "<span class='live-tag'>Live</span> 冬天被窝捂不热？手脚像冰块？" },
+                    { time: "3-5s", shot: "特写", visual: "惨白的手指/雾气窗户。", audio: "<span class='live-tag'>Live</span> 真火灭了，寒气冻住经络。" },
+                    { time: "5-9s", shot: "全景 (环绕)", visual: "扶阳桩。双手环抱丹田，眼神如火。", audio: "<span class='vo-tag'>VO</span> 每天站三组...脚底生根，引火归元。" },
+                    { time: "9-12s", shot: "特写", visual: "脚趾抓地 -> 额头微汗 -> 丹田暖光特效。", audio: "<span class='vo-tag'>VO</span> 坚持站下去...全身发热，阳气升起。" },
+                    { time: "12-15s", shot: "中景", visual: "收功，拿出一根艾条撕开。", audio: "<span class='live-tag'>Live</span> 因为我的体质天生偏寒，每当我练完功..." },
+                    { time: "15-19s", shot: "极近特写", visual: "金黄艾绒 -> 手工卷制 -> 袅袅白烟。", audio: "<span class='vo-tag'>VO</span> ...都会用师父自制的手工艾条，把寒气逼出来。" },
+                    { time: "19-22s", shot: "近景", visual: "熏足三里，一脸享受。", audio: "<span class='live-tag'>Live</span> 练完功熏一熏足三里。锁住阳气。" },
+                    { time: "22-25s", shot: "特写", visual: "递出礼盒。", audio: "<span class='live-tag'>Live</span> 别再挨冻了，给懂货的道友备好了。" },
+                ]
+            }
+        };
+
+        // --- CHART INSTANCES ---
+        let pacingChartInstance = null;
+        let radarChartInstance = null;
+        let lightingChartInstance = null;
+
+        // --- INITIALIZATION ---
+        document.addEventListener('DOMContentLoaded', () => {
+            initRadarChart();
+            initLightingChart();
+            loadVideoData(1); // Load Video 1 by default
+        });
+
+        // --- FUNCTIONS ---
+
+        function loadVideoData(videoId) {
+            const data = videoData[videoId];
+            
+            // 1. Update UI Text
+            document.getElementById('video-title').textContent = data.title;
+            document.getElementById('video-purpose').textContent = data.purpose;
+            document.getElementById('video-hammer').textContent = data.hammer;
+            document.getElementById('bgm-notes').textContent = data.bgm;
+
+            // 2. Update Director Notes
+            const notesList = document.getElementById('director-notes');
+            notesList.innerHTML = '';
+            data.directorNotes.forEach(note => {
+                const li = document.createElement('li');
+                li.textContent = note;
+                notesList.appendChild(li);
+            });
+
+            // 3. Update Script Table
+            const tbody = document.getElementById('script-body');
+            tbody.innerHTML = '';
+            data.script.forEach((row, index) => {
+                const tr = document.createElement('tr');
+                tr.className = index % 2 === 0 ? 'bg-white' : 'bg-gray-50';
+                tr.innerHTML = `
+                    <td class="px-3 py-3 whitespace-nowrap text-gray-900 font-medium">${row.time}</td>
+                    <td class="px-3 py-3 text-gray-500">${row.shot}</td>
+                    <td class="px-3 py-3 text-gray-700">${row.visual}</td>
+                    <td class="px-3 py-3 text-gray-600 italic leading-relaxed">${row.audio}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+
+            // 4. Update Pacing Chart
+            updatePacingChart(data.pacing);
+
+            // 5. Update Tab Styles
+            document.querySelectorAll('button[id^="btn-v"]').forEach(btn => {
+                btn.classList.remove('tab-active');
+                btn.classList.add('tab-inactive');
+            });
+            const activeBtn = document.getElementById(`btn-v${videoId}`);
+            activeBtn.classList.remove('tab-inactive');
+            activeBtn.classList.add('tab-active');
+        }
+
+        function initRadarChart() {
+            const ctx = document.getElementById('personaRadar').getContext('2d');
+            radarChartInstance = new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: ['强反差 (Contrast)', '真实修行 (Real)', '视觉美学 (Aesthetic)', '亲和力 (Kindness)', '神秘感 (Mystery)'],
+                    datasets: [{
+                        label: 'IP 属性强度',
+                        data: [95, 90, 85, 70, 75],
+                        fill: true,
+                        backgroundColor: 'rgba(44, 92, 85, 0.2)',
+                        borderColor: '#2C5C55',
+                        pointBackgroundColor: '#2C5C55',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: '#2C5C55'
+                    }]
+                },
+                options: {
+                    maintainAspectRatio: false,
+                    scales: {
+                        r: {
+                            angleLines: { color: '#E5E7EB' },
+                            grid: { color: '#E5E7EB' },
+                            pointLabels: { font: { family: "'Noto Sans SC'" }, color: '#4B5563' },
+                            suggestedMin: 50,
+                            suggestedMax: 100,
+                            ticks: { display: false } // Hide numbers for cleaner look
+                        }
+                    },
+                    plugins: { legend: { display: false } }
+                }
+            });
+        }
+
+        function updatePacingChart(data) {
+            const ctx = document.getElementById('pacingChart').getContext('2d');
+            
+            if (pacingChartInstance) {
+                pacingChartInstance.destroy();
+            }
+
+            pacingChartInstance = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['本集节奏'],
+                    datasets: [
+                        { label: 'Hook (黄金3秒)', data: [data[0]], backgroundColor: '#EF4444' }, // Red
+                        { label: 'Body (核心内容)', data: [data[1]], backgroundColor: '#F59E0B' }, // Yellow
+                        { label: 'CTA (转化)', data: [data[2]], backgroundColor: '#3B82F6' }  // Blue
+                    ]
+                },
+                options: {
+                    indexAxis: 'y',
+                    maintainAspectRatio: false,
+                    responsive: true,
+                    scales: {
+                        x: { stacked: true, grid: { display: false }, max: 25 }, // Max approx 25s
+                        y: { stacked: true, display: false }
+                    },
+                    plugins: {
+                        legend: { position: 'bottom', labels: { boxWidth: 10, font: { size: 10 } } },
+                        tooltip: {
+                            callbacks: {
+                                title: () => '时长分配 (秒)'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        function initLightingChart() {
+            const ctx = document.getElementById('lightingChart').getContext('2d');
+            lightingChartInstance = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['6:00', '8:00', '10:00', '12:00', '14:00', '16:00', '17:30', '19:00'],
+                    datasets: [{
+                        label: '光线质量指数',
+                        data: [90, 85, 60, 20, 30, 95, 100, 40],
+                        borderColor: '#D97706',
+                        backgroundColor: 'rgba(217, 119, 6, 0.1)',
+                        borderWidth: 2,
+                        fill: true,
+                        tension: 0.4,
+                        pointBackgroundColor: '#fff',
+                        pointBorderColor: '#D97706',
+                        pointRadius: 4
+                    }]
+                },
+                options: {
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: { 
+                            beginAtZero: true, 
+                            max: 100,
+                            title: { display: true, text: '出片率' }
+                        },
+                        x: {
+                            grid: { display: false }
+                        }
+                    },
+                    plugins: {
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return context.parsed.y > 80 ? '🔥 黄金时间: 极佳' : (context.parsed.y < 40 ? '❌ 避免: 光线硬/暗' : '⚠️ 普通: 需补光');
+                                }
+                            }
+                        },
+                        legend: { display: false },
+                        annotation: {
+                            annotations: {
+                                box1: {
+                                    type: 'box',
+                                    xMin: 3, // 12:00
+                                    xMax: 4, // 14:00
+                                    backgroundColor: 'rgba(239, 68, 68, 0.1)',
+                                    label: { content: "避免顶光", position: "center", color: "red", font: {size: 10} }
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html>
